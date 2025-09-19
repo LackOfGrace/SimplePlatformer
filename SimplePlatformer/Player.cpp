@@ -16,6 +16,7 @@ void Player::Draw(Game* game)
 
 void Player::Update()
 {
+	// Update input
 	left.Update();
 	right.Update();
 	jump.Update();
@@ -23,13 +24,15 @@ void Player::Update()
 	float newX = x;
 	float newY = y;
 
+	// Gravity
 	vy -= 0.3f;
-
 	newY += vy;
 
+	// Horizontal movement
 	if (left.IsDown()) newX -= 3;
 	if (right.IsDown()) newX += 3;
 
+	// Collision check down
 	if (!world->Collision(x, newY) && !world->Collision(x + 16, newY))
 	{
 		y = newY;
@@ -41,11 +44,13 @@ void Player::Update()
 		vy = 0;
 	}
 
+	// Jumping
 	if (isGrounded && jump.WasPressed())
 	{
 		vy = 8;
 	}
 
+	// Collision check horizontal
 	if (!world->Collision(newX, y) && !world->Collision(newX + 16, y))
 	{
 		x = newX;

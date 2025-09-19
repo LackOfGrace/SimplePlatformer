@@ -11,6 +11,8 @@ World::World(int w, int h, const char* data)
 
 bool World::Collision(int x, int y)
 {
+	// Convert world coordinates to level cell and check state
+
 	int cellX = x / 16;
 	int cellY = y / 16;
 
@@ -22,6 +24,7 @@ bool World::Collision(int x, int y)
 
 void World::Draw(Game* game)
 {
+	// Iterate through all cells and draw correct tile
 	for (int y = 0; y < height; y++)
 	{
 		for (int x = 0; x < width; x++)
